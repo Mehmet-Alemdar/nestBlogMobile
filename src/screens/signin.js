@@ -1,9 +1,11 @@
 import { Text, SafeAreaView, StyleSheet, Dimensions, Image, View } from "react-native"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import Input from "../components/input"
 import Button from '../components/button'
 import { useTheme } from '@react-navigation/native';
-
+import { showMessage } from "react-native-flash-message";
+import { singInApi } from "../lib/apiConnection";
+import { AuthContext } from "../auth/authentication";
 
 const { width } = Dimensions.get('window')
 const SingIn = () => {
@@ -11,7 +13,24 @@ const SingIn = () => {
   const [password, setPassword] = useState('')
   const { colors } = useTheme();
 
+  const { signIn } = useContext(AuthContext)
+
   const handlerSignIn = () => {
+    singInApi({email, password}).then((res) => {
+      if(!res.error) {
+        signIn({email, token: res.token})
+        return
+      } else {
+        showMessage({
+          message: res.message,
+          type: 'danger',
+          icon: 'danger',
+          duration: 3000,
+          floating: true,
+          backgroundColor: colors.danger,
+        })
+      }
+    }) 
   }
 
   return (
