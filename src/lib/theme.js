@@ -4,10 +4,13 @@ export const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: '#7175F0',
-    textColor: '#fff',
     inputTextColor: '#05001A',
-    buttonBackground: '#D5F634',
-    modalBackground: 'gray'
+    primaryColor: '#7175F0',
+    ligtPrimaryColor: '#AEB1F7',
+    secondaryColor: '#D5F634',
+    danger: '#FF0000',
+    success: '#00FF00',
+    thirdColor: '#FFA500',
+    background: '#FFF8EE',
   },
 };

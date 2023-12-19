@@ -8,7 +8,7 @@ const Button = ({ onPress, children }) => {
 
   return (
     <TouchableOpacity 
-      style={styles.button(colors.buttonBackground)}
+      style={styles.button(colors.secondaryColor)}
       onPress={() => onPress()}>
       {children}
     </TouchableOpacity>

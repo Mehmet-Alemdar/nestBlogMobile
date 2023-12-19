@@ -15,8 +15,8 @@ const SingIn = () => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.imgContainer(colors.buttonBackground)}>
+    <SafeAreaView style={styles.container(colors)}>
+      <View style={styles.imgContainer(colors)}>
         <Image source={require('../../assets/images/lg-img.png')} style={{width: width * 0.6, height: width * 0.6}}/>
       </View>
       <Input placeholder="Email" iconName={'md-mail'} onChangeText={setEmail}/>
@@ -29,17 +29,18 @@ const SingIn = () => {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container: (color) => ({
     flex: 1,
-    alignItems: "center"
-  },
+    alignItems: "center",
+    backgroundColor: color.background,
+  }),
   imgContainer:  (color) => ({
-    backgroundColor: 'white',
+    backgroundColor: color.primaryColor,
     borderRadius: 200,
     marginTop: 60,
     marginBottom: 30,
     borderWidth: 5,
-    borderColor: color,
+    borderColor: color.ligtPrimaryColor,
   }),
   buttonText: ({width}) => ({
     color: 'black',

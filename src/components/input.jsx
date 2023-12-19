@@ -22,7 +22,7 @@ const Input = ({ placeholder, value, onChangeText, secureTextEntry, iconName }) 
       <Ionicons
         name={iconName}
         size={32}
-        color={isFocused ? colors.buttonBackground: 'gray'}
+        color={isFocused ? colors.secondaryColor: 'gray'}
         style={styles.icon}
       />
       <TextInput
