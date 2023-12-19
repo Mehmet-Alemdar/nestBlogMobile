@@ -31,6 +31,7 @@ const SingIn = ({ navigation }) => {
         } else {
           showMessage({
             message: res.message,
+            description: res.description,
             type: 'danger',
             icon: 'danger',
             duration: 3000,
