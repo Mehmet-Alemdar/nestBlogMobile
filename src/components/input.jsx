@@ -5,7 +5,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 const { height } = Dimensions.get('window');
 
-const Input = ({ placeholder, value, onChangeText, secureTextEntry, iconName }) => {
+const Input = ({ placeholder, value, onChangeText, secureTextEntry, iconName, type }) => {
   const { colors } = useTheme();
   const [isFocused, setIsFocused] = useState(false);
 
@@ -34,6 +34,7 @@ const Input = ({ placeholder, value, onChangeText, secureTextEntry, iconName }) 
         onFocus={handleFocus}
         onBlur={handleBlur}
         style={styles.input(colors.inputTextColor)}
+        keyboardType={type ? type : 'default'}
       />
     </View>
   );
