@@ -1,4 +1,4 @@
-import { Text, SafeAreaView, StyleSheet, Dimensions, Image, View } from "react-native"
+import { Text, SafeAreaView, StyleSheet, Dimensions, Image, View, TouchableOpacity } from "react-native"
 import { useState, useContext } from "react"
 import Input from "../components/input"
 import Button from '../components/button'
@@ -8,7 +8,7 @@ import { singInApi } from "../lib/apiConnection";
 import { AuthContext } from "../auth/authentication";
 
 const { width } = Dimensions.get('window')
-const SingIn = () => {
+const SingIn = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { colors } = useTheme();
@@ -16,21 +16,30 @@ const SingIn = () => {
   const { signIn } = useContext(AuthContext)
 
   const handlerSignIn = () => {
-    singInApi({email, password}).then((res) => {
-      if(!res.error) {
-        signIn({email, token: res.token})
-        return
-      } else {
-        showMessage({
-          message: res.message,
-          type: 'danger',
-          icon: 'danger',
-          duration: 3000,
-          floating: true,
-          backgroundColor: colors.danger,
-        })
-      }
-    }) 
+    if(email === '' || password === '') {
+      showMessage({
+        message: "Please fill all the fields",
+        type: "info",
+        icon: 'info',
+        backgroundColor: colors.necessary,
+      });
+    } else {
+      singInApi({email, password}).then((res) => {
+        if(!res.error) {
+          signIn({email, token: res.token})
+          return
+        } else {
+          showMessage({
+            message: res.message,
+            type: 'danger',
+            icon: 'danger',
+            duration: 3000,
+            floating: true,
+            backgroundColor: colors.danger,
+          })
+        }
+      }) 
+    }
   }
 
   return (
@@ -43,6 +52,12 @@ const SingIn = () => {
       <Button onPress={handlerSignIn}>
         <Text style={styles.buttonText({width})}>Sign in</Text>
       </Button>
+      <View style={styles.signUpContainer}>
+        <Text style={{fontSize: width * 0.035, color: colors.textColor}}>Don't have an account? </Text>
+        <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+          <Text style={[styles.signUpText({width}), {color: colors.textColor}]}>Sign up</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   )
 }
@@ -66,6 +81,17 @@ const styles = StyleSheet.create({
     fontSize: width * 0.05,
     fontWeight: '300'
   }),
+  signUpContainer: {
+    width: '80%',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    marginTop: 10
+  },
+  signUpText: ({width}) => ({
+    fontSize: width * 0.035,
+    color: 'black',
+    fontWeight: 'bold'
+  })
 })
 
 export default SingIn
