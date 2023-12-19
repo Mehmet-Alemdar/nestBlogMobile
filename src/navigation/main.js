@@ -3,9 +3,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useTheme } from "@react-navigation/native";
 
-// import HomeScreen from "../screens/Home"
-// import UsersScreen from "../screens/Users"
-// import ProfileScreen from "../screens/Profile"
+import HomeScreen from "../screens/home"
+import CreateBlogScreen from "../screens/createBlog"
+import ProfileScreen from "../screens/profile"
 
 const Tab = createBottomTabNavigator();
 
@@ -21,8 +21,8 @@ const Main = () => {
           iconName = focused
             ? 'ios-home'
             : 'ios-home-outline';
-        } else if (route.name === 'Users') {
-          iconName = focused ? 'ios-list' : 'ios-list-outline';
+        } else if (route.name === 'Create Blog') {
+          iconName = focused ? 'add-circle' : 'add-circle-outline';
         } else if (route.name === 'Profile') {
           iconName = focused ? 'ios-person' : 'ios-person-outline';
         }
@@ -42,6 +42,10 @@ const Main = () => {
         color: colors.textColor
       }
     })}>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Create Blog" component={CreateBlogScreen} /> 
+      <Tab.Screen name="Profile" component={ProfileScreen} /> 
+
       {/* <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Users" component={UsersScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} /> */}
