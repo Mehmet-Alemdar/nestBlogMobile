@@ -5,7 +5,7 @@ import Button from '../components/button'
 import { useTheme } from '@react-navigation/native';
 import { showMessage } from "react-native-flash-message";
 import { singInApi } from "../lib/apiConnection";
-import { AuthContext } from "../auth/authentication";
+import { AuthContext } from "../contexts/authContext";
 
 const { width } = Dimensions.get('window')
 const SingIn = ({ navigation }) => {
@@ -26,7 +26,7 @@ const SingIn = ({ navigation }) => {
     } else {
       singInApi({email, password}).then((res) => {
         if(!res.error) {
-          signIn({email, token: res.token})
+          signIn({id: res.id, token: res.token})
           return
         } else {
           showMessage({

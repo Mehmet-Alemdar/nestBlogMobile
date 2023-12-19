@@ -1,12 +1,12 @@
-const { SafeAreaView, Text, View, StyleSheet, Dimensions, TouchableOpacity, Image} = require("react-native")
+import { SafeAreaView, Text, View, StyleSheet, Dimensions, TouchableOpacity, Image} from "react-native"
 import { useState, useContext } from 'react'
 import { showMessage } from "react-native-flash-message"
 import Input from '../components/input'
 import Button from '../components/button'
 import { useTheme } from '@react-navigation/native'
 const { width } = Dimensions.get('window')
-import { AuthContext }  from "../auth/authentication"
-import { signUpApi, singUpApi } from "../lib/apiConnection"
+import { AuthContext } from "../contexts/authContext"
+import { signUpApi} from "../lib/apiConnection"
 
 
 const SignUp = ({navigation}) => {
@@ -37,7 +37,7 @@ const SignUp = ({navigation}) => {
       } else {
         signUpApi({name, age: Number(age), email, password}).then((res) => {
           if(!res.error) {
-            signIn({email: email, token: "res.token"})
+            signIn({id: res.id, token: res.token})
             return
           }
           showMessage({

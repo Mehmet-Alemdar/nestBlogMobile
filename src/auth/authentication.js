@@ -8,7 +8,7 @@ import SplashScreen from '../screens/splash'
 import MainNavigator from '../navigation/main'
 import AuthNavigator from '../navigation/auth'
 
-export const AuthContext = createContext()
+import { AuthContext } from '../contexts/authContext'
 
 const Stack = createStackNavigator()
 
