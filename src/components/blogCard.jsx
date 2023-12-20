@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useTheme } from '@react-navigation/native';
 
-const BlogCard = ({ userProfileImage, title, content, likeCount }) => {
+import { AuthContext } from '../contexts/authContext'
+
+const BlogCard = ({ blogImage, userProfileImage, topic, title, userName, date, likeCount }) => {
   const [liked, setLiked] = useState(false);
   const [likeCountState, setLikeCountState] = useState(likeCount);
   const { colors } = useTheme();
+
+  useEffect(() => {
+
+  }, []);
   const handleLikePress = () => {
     setLiked(!liked);
     if (liked) {
@@ -18,85 +24,82 @@ const BlogCard = ({ userProfileImage, title, content, likeCount }) => {
 
   return (
     <View style={styles.container(colors)}>
-      <View style={styles.topContainer}>
-        <View style={styles.imageContainer}>
-          <View style={styles.hr(colors)}></View>
-          <Image source={{ uri: userProfileImage }} style={styles.userImage(colors)} />
+      <View style={styles.content}>
+        <Image source={{ uri: blogImage }} style={{ width: '30%', height: '100%', borderRadius: 3 }} />
+        <View style={styles.contentText}>
+          <Text style={styles.topicText}>{topic}</Text>
+          <Text style={styles.titleText} numberOfLines={2} ellipsizeMode="tail">{title}</Text>
+          <View style={styles.footer}>
+            <View style={styles.topFooter}>
+              <Image source={{ uri: userProfileImage }} style={{ width: 30, height: 30, borderRadius: 100 }}/>
+              <Text style={styles.userNameText}>By {userName}</Text>
+            </View>
+            <View style={styles.bottomFooter}>
+              <Text style={styles.dateText}>{date}</Text>
+              <AntDesign name="star" size={15} color={colors.secondaryColor} />
+              <Text style={styles.likeText(colors)}>{likeCountState}</Text>
+              {/* <TouchableOpacity>
+                <Text>Read More </Text>
+              </TouchableOpacity> */}
+            </View>
+          </View>
         </View>
-        <View style={styles.contentContainer}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.content} numberOfLines={10} ellipsizeMode="tail">{content}</Text>
-        </View>
-      </View>
-      <View style={styles.likeContainer}>
-        <TouchableOpacity onPress={handleLikePress}>
-          {liked ? (
-            <AntDesign name="heart" size="20" color={colors.primaryColor}/>
-          ) : (
-            <AntDesign name="hearto" size="20" color={colors.primaryColor}/>
-          )}
-        </TouchableOpacity>
-        <Text style={styles.likeCount(colors)}>{likeCountState} Likes</Text>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container:(colors) => ({
-    padding: 5,
-    borderBottomWidth: 1,
-    backgroundColor: colors.cardBackground,
+  container: (colors) => ({
     flexDirection: 'column',
-    borderBottomColor: colors.primaryColor,
+    marginTop: 20,
   }),
-  topContainer: {
-    flexDirection: 'row',
-  },
-  imageContainer: {
-    alignItems: 'center',
-  },
-  hr: (colors) => ({
-    backgroundColor: colors.secondaryColor,
-    border: 1,
-    height: '100%',
-    position: 'absolute',
-    width: 2,
-  }),
-  userImage: (colors) => ({
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginTop: 15,
-    borderWidth: 2,
-    borderColor: colors.secondaryColor,
-  }),
-  contentContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    marginLeft: 6
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginTop: 10,
-    color: 'black'
-  },
   content: {
-    fontSize: 14,
-    marginTop: 5,
-  },
-  likeContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
-    paddingTop: 10,
-    paddingLeft: 16,
     gap: 10,
   },
-  likeCount: (colors) => ({
-    fontSize: 14,
+  contentText: {
+    flex: 1,
+    flexDirection: 'column',
+    gap: 8,
+  },
+  topicText: {
+    fontSize: 18,
     fontWeight: 'bold',
-    color: colors.secondaryColor,
+    color: '#bfbfbf'
+  },
+  titleText: {
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+  footer: {
+    flexDirection: 'column',
+  },
+  topFooter: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  userNameText: {
+    fontWeight: 'bold',
+    fontSize: 12,
+  },
+  bottomFooter: {
+    flexDirection: 'row',
+    gap: 10,
+    alignItems: 'center',
+  },
+  dateText: {
+    fontSize: 11,
+    fontWeight: 'bold',
+    marginTop: 5,
+    color: '#bfbfbf'
+  },
+  likeText: (colors) => ({
+    fontSize: 13,
+    fontWeight: 'bold',
+    marginTop: 5,
+    color: colors.secondaryColor
   }),
 });
 
