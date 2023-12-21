@@ -13,7 +13,7 @@ export const MyTheme = {
     success: '#00FF00',
     necessary: "#FFA500", 
     thirdColor: '#FFA500',
-    background: '#FFF8EE',
+    background: '#fff',
     cardBackground: '#FFF8EE',
   },
 };
