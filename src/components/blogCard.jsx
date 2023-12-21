@@ -5,55 +5,37 @@ import { useTheme } from '@react-navigation/native';
 
 import { AuthContext } from '../contexts/authContext'
 
-const BlogCard = ({ blogImage, userProfileImage, topic, title, userName, date, likeCount }) => {
-  const [liked, setLiked] = useState(false);
-  const [likeCountState, setLikeCountState] = useState(likeCount);
+const BlogCard = ({ blogImage, userProfileImage, topic, title, userName, date, likeCount, blogId, navigation }) => {
   const { colors } = useTheme();
 
-  useEffect(() => {
-
-  }, []);
-  const handleLikePress = () => {
-    setLiked(!liked);
-    if (liked) {
-      setLikeCountState(likeCountState - 1);
-    } else {
-      setLikeCountState(likeCountState + 1);
-    }
-  };
 
   return (
-    <View style={styles.container(colors)}>
-      <View style={styles.content}>
-        <Image source={{ uri: blogImage }} style={{ width: '30%', height: '100%', borderRadius: 3 }} />
-        <View style={styles.contentText}>
-          <Text style={styles.topicText}>{topic}</Text>
-          <Text style={styles.titleText} numberOfLines={2} ellipsizeMode="tail">{title}</Text>
-          <View style={styles.footer}>
-            <View style={styles.topFooter}>
-              <Image source={{ uri: userProfileImage }} style={{ width: 30, height: 30, borderRadius: 100 }}/>
-              <Text style={styles.userNameText}>By {userName}</Text>
-            </View>
-            <View style={styles.bottomFooter}>
-              <Text style={styles.dateText}>{date}</Text>
-              <AntDesign name="star" size={15} color={colors.secondaryColor} />
-              <Text style={styles.likeText(colors)}>{likeCountState}</Text>
-              {/* <TouchableOpacity>
-                <Text>Read More </Text>
-              </TouchableOpacity> */}
-            </View>
-          </View>
+    <TouchableOpacity style={styles.content} onPress={handlePress}>
+    <Image source={{ uri: blogImage }} style={{ width: '30%', height: '100%', borderRadius: 3 }} />
+    <View style={styles.contentText}>
+      <Text style={styles.topicText}>{topic}</Text>
+      <Text style={styles.titleText} numberOfLines={2} ellipsizeMode="tail">{title}</Text>
+      <View style={styles.footer}>
+        <View style={styles.topFooter}>
+          <Image source={{ uri: userProfileImage }} style={{ width: 32, height: 32, borderRadius: 100, borderWidth: 2, borderColor: colors.primaryColor }}/>
+          <Text>By</Text>
+          <Text style={styles.userNameText}>{userName}</Text>
+        </View>
+        <View style={styles.bottomFooter}>
+          <Text style={styles.dateText}>{date}</Text>
+          <AntDesign name="star" size={15} color={colors.secondaryColor} />
+          <Text style={styles.likeText(colors)}>{likeCount}</Text>
+          {/* <TouchableOpacity>
+            <Text>Read More </Text>
+          </TouchableOpacity> */}
         </View>
       </View>
     </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  container: (colors) => ({
-    flexDirection: 'column',
-    marginTop: 20,
-  }),
   content: {
     flexDirection: 'row',
     gap: 10,
@@ -61,7 +43,7 @@ const styles = StyleSheet.create({
   contentText: {
     flex: 1,
     flexDirection: 'column',
-    gap: 8,
+    gap: 10,
   },
   topicText: {
     fontSize: 18,
@@ -78,7 +60,7 @@ const styles = StyleSheet.create({
   topFooter: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
+    gap: 5,
   },
   userNameText: {
     fontWeight: 'bold',
