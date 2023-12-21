@@ -7,6 +7,7 @@ const Home = () => {
   const { colors } = useTheme()
   const [selectedTopic, setSelectedTopic] = useState('All')
   return (
+    <SafeAreaView style={{flex: 1}}>
     <ScrollView style={styles.container}>
       <Text style={{fontWeight: 'bold', fontSize: 40}}>Discover Latest Blogs</Text>
       <View style={{flexDirection: 'column', gap: 10, marginTop: 10}}>
@@ -40,6 +41,8 @@ const Home = () => {
         likeCount={32}
       />
     </ScrollView>
+    </SafeAreaView>
+
   )
 }
 
