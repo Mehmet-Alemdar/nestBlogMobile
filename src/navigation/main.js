@@ -42,7 +42,7 @@ const Main = () => {
         color: colors.textColor
       }
     })}>
-      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Home" component={HomeScreen}  options={{headerShown: false}}/>
       <Tab.Screen name="Create Blog" component={CreateBlogScreen} /> 
       <Tab.Screen name="Profile" component={ProfileScreen} /> 
 
