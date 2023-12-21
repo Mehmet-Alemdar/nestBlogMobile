@@ -107,6 +107,15 @@ const Authentication = () => {
         console.log("error getting user id", error);
         return {error: error}
       }
+    },
+    getUserId: async () => {
+      try {
+        const id = await state.userId
+        return id
+      } catch (error) {
+        console.log("error getting user id", error);
+        return {error: error}
+      }
     }
   }), [state.userToken, state.userId])
 
