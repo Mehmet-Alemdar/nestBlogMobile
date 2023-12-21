@@ -7,6 +7,7 @@ import { MyTheme } from '../lib/theme'
 import SplashScreen from '../screens/splash'
 import MainNavigator from '../navigation/main'
 import AuthNavigator from '../navigation/auth'
+import BlogDetail from '../screens/blogDetail'
 
 import { AuthContext } from '../contexts/authContext'
 
@@ -118,7 +119,10 @@ const Authentication = () => {
           ) : state.userToken == null ? (
             <Stack.Screen name="Auth" component={AuthNavigator} options={{headerShown: false}}/>
           ) : (
-            <Stack.Screen name="Main" component={MainNavigator} options={{headerShown: false}}/>
+            <>
+              <Stack.Screen name="Main" component={MainNavigator} options={{headerShown: false}}/>
+              <Stack.Screen name="BlogDetail" component={BlogDetail}/>
+            </>
           )
         }
         </Stack.Navigator>

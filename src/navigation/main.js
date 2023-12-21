@@ -45,10 +45,6 @@ const Main = () => {
       <Tab.Screen name="Home" component={HomeScreen}  options={{headerShown: false}}/>
       <Tab.Screen name="Create Blog" component={CreateBlogScreen} /> 
       <Tab.Screen name="Profile" component={ProfileScreen} /> 
-
-      {/* <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Users" component={UsersScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} /> */}
     </Tab.Navigator>
   );
 }

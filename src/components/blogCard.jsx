@@ -8,6 +8,9 @@ import { AuthContext } from '../contexts/authContext'
 const BlogCard = ({ blogImage, userProfileImage, topic, title, userName, date, likeCount, blogId, navigation }) => {
   const { colors } = useTheme();
 
+  const handlePress = () => {
+    navigation.navigate('BlogDetail', { blogId })
+  }
 
   return (
     <TouchableOpacity style={styles.content} onPress={handlePress}>
