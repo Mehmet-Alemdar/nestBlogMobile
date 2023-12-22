@@ -27,9 +27,6 @@ const BlogCard = ({ blogImage, userProfileImage, topic, title, userName, date, l
           <Text style={styles.dateText}>{date}</Text>
           <AntDesign name="star" size={15} color={colors.secondaryColor} />
           <Text style={styles.likeText(colors)}>{likeCount}</Text>
-          {/* <TouchableOpacity>
-            <Text>Read More </Text>
-          </TouchableOpacity> */}
         </View>
       </View>
     </View>
