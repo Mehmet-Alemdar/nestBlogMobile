@@ -29,7 +29,7 @@ const Main = () => {
 
         return <Ionicons name={iconName} size={size} color={color} />;
       },
-      tabBarActiveTintColor: colors.textColor,
+      tabBarActiveTintColor: colors.secondaryColor,
       tabBarInactiveTintColor: 'gray',
       tabBarStyle:{
         backgroundColor: colors.background,
@@ -38,9 +38,6 @@ const Main = () => {
       headerStyle: {
         backgroundColor: colors.background,
       },
-      headerTitleStyle: {
-        color: colors.textColor
-      }
     })}>
       <Tab.Screen name="Home" component={HomeScreen}  options={{headerShown: false}}/>
       <Tab.Screen name="Create Blog" component={CreateBlogScreen} /> 
