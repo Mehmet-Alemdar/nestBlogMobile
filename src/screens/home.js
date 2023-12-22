@@ -1,8 +1,8 @@
 import { SafeAreaView, Text, ScrollView, StyleSheet, View, Animated, Easing } from "react-native";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import TopicCard from "../components/topicCard";
 import BlogCard from "../components/blogCard";
-import { useTheme } from "@react-navigation/native";
+import { useTheme, useFocusEffect } from "@react-navigation/native";
 import { fetchBlogPosts } from "../lib/apiConnection";
 import moment from 'moment';
 const Home = ({navigation}) => {
@@ -13,23 +13,27 @@ const Home = ({navigation}) => {
   const [topicData, setTopicData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
-    fetchBlogPosts().then((res) => {
-      if(!res.error) {
-        setData(res)
-        setFilteredData(res)
-        let t = res.map((blog) => blog.topic)
-        const uniqueTopic = [...new Set(t)]
-        if(uniqueTopic.length == 1) {
-          setSelectedTopic(uniqueTopic[0])
-        } else {
-          setSelectedTopic('All')
+
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchBlogPosts().then((res) => {
+        if(!res.error) {
+          setData(res)
+          setFilteredData(res)
+          let t = res.map((blog) => blog.topic)
+          const uniqueTopic = [...new Set(t)]
+          if(uniqueTopic.length == 1) {
+            setSelectedTopic(uniqueTopic[0])
+          } else {
+            setSelectedTopic('All')
+          }
+          setTopicData(uniqueTopic)
+          setIsLoading(false)
         }
-        setTopicData(uniqueTopic)
-        setIsLoading(false)
-      }
-    })
-  }, [])
+      })
+    }, [])
+  )
   const animatedValue = useRef(new Animated.Value(0)).current;
 
   const startAnimation = () => {
@@ -78,7 +82,7 @@ const Home = ({navigation}) => {
         {filteredData.map((blog, i) => {
         const translateY = animatedValue.interpolate({
           inputRange: [0, 1],
-          outputRange: [100 * i, 0], // You can adjust the values as needed
+          outputRange: [100 * i, 0]
         });
 
         return (
