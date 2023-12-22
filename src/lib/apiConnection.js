@@ -54,3 +54,14 @@ export const likeBlog = async (token, blogId, userId) => {
     return {message: 'blog fetching failed', description: error.response.data.message[0], error}
   }
 }
+
+export const fetchUserById = async (token,id) => {
+  try {
+    const { data } = await axios.get(`${BASE_URL}/user/findOne/${id}`, {
+      headers: { Authorization: token}
+    })
+    return data
+  } catch(error) {
+    return {message: 'user fetching failed', description: error.response.data.message[0], error}
+  }
+}
