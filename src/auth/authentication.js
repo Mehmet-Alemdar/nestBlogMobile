@@ -132,7 +132,7 @@ const Authentication = () => {
               <Stack.Screen name="Main" component={MainNavigator} options={{headerShown: false}}/>
               <Stack.Screen name="BlogDetail" component={BlogDetail}   options={({ route }) => ({
                 title: route.params.topic || 'Blog Detail', 
-                headerBackTitle: 'Home',
+                headerBackTitle: '',
                 headerTransparent: true,
                 headerStyle: {
                   backgroundColor: 'rgba(0, 0, 0, 0.5)',
