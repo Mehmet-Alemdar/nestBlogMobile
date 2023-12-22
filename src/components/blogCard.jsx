@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { useTheme } from '@react-navigation/native';
-
+import { useTheme, } from '@react-navigation/native';
 import { AuthContext } from '../contexts/authContext'
 
 const BlogCard = ({ blogImage, userProfileImage, topic, title, userName, date, likeCount, blogId, navigation }) => {
   const { colors } = useTheme();
 
   const handlePress = () => {
-    navigation.navigate('BlogDetail', { blogId })
+    navigation.navigate('BlogDetail', { blogId, topic })
   }
 
   return (

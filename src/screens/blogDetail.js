@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -68,7 +68,7 @@ const BlogDetail = ({ route }) => {
             </Text>
             <View style={styles.userContainer}>
               <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', gap: 5, flex: 1 }}>
-                <Image source={{ uri: data.user.profilePicture}} style={styles.userImg(colors)}/>
+                <Image source={{ uri: data.user.profilePicture}} style={styles.userImg}/>
                 <Text style={styles.userNameText}>{data.user.name}</Text>
               </TouchableOpacity>
               <View style={{ flexDirection: 'column', alignItems: 'center', gap: 5, flex: 1, justifyContent: 'center' }}>
@@ -89,8 +89,6 @@ const BlogDetail = ({ route }) => {
         </ScrollView>
       }
     </>
-
-
   );
 };
 
@@ -120,13 +118,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginBottom: 10
   },
-  userImg: (colors) => ({
+  userImg:{
     width: 55,
     height: 55,
     borderRadius: 100,
     borderWidth: 3,
-    borderColor: colors.primaryColor,
-  }),
+    borderColor: "white",
+  },
   userNameText: {
     fontSize: 12,
     fontWeight: 'bold',
@@ -142,9 +140,9 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   contentText: {
-
     fontSize: 16,
     lineHeight: 25,
+    paddingBottom: 30,
   }
 });
 
